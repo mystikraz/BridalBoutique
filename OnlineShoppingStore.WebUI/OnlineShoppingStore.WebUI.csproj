@@ -179,6 +179,7 @@
   <ItemGroup>
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\NavController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Global.asax.cs">
@@ -209,7 +210,9 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Views\Cart\" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\OnlineShoppingStore.Domain\OnlineShoppingStore.Domain.csproj">
       <Project>{6bf326de-28e8-4b3c-8616-58264c22669f}</Project>
