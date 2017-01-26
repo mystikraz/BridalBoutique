@@ -1,5 +1,6 @@
 ﻿using OnlineShoppingStore.Domain.Abstract;
 using OnlineShoppingStore.Domain.Entities;
+using OnlineShoppingStore.WebUI.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,14 @@ namespace OnlineShoppingStore.WebUI.Controllers
         public CartController(IProductRepository repo)
         {
             repository = repo;
+        }
+        public ViewResult Index(string returnUrl)
+        {
+            return View(new CartIndexViewModel
+            {
+                Cart = GetCart(),
+                ReturnUrl = returnUrl
+            });
         }
 
         public RedirectToRouteResult AddToCart(int productId, string returnUrl)
