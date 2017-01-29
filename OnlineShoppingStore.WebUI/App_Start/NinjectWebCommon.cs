@@ -15,6 +15,7 @@ namespace OnlineShoppingStore.WebUI.App_Start
     using Domain.Entities;
     using System.Collections.Generic;
     using Domain.Concrete;
+    using System.Configuration;
 
     public static class NinjectWebCommon 
     {
@@ -66,7 +67,18 @@ namespace OnlineShoppingStore.WebUI.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
-            kernel.Bind<IProductRepository>().To<EFProductRepository>();            //Mock<IProductRepository> mock = new Mock<IProductRepository>();
+            kernel.Bind<IProductRepository>().To<EFProductRepository>();
+
+            EmailSettings emailSettings = new EmailSettings
+            {
+                WriteAsFile = bool.Parse(ConfigurationManager
+                    .AppSettings["Email.WriteAsFile"] ?? "false")
+            };
+
+            kernel.Bind<IOrderProcessor>().To<EmailOrderProcessor>()
+                .WithConstructorArgument("settings", emailSettings);
+
+            //Mock<IProductRepository> mock = new Mock<IProductRepository>();
             //mock.Setup(m => m.Products).Returns(new List<Product>
             //{
             //    new Product {Name="Football", Price=23, Description="test" },

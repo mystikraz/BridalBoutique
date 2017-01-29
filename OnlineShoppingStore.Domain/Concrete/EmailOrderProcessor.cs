@@ -1,16 +1,16 @@
-﻿using OnlineShoppingStore.Domain.Abstract;
-using System.Text;
-using OnlineShoppingStore.Domain.Entities;
-using System;
+﻿using System.Net;
 using System.Net.Mail;
-using System.Net;
+using System.Text;
+using OnlineShoppingStore.Domain.Abstract;
+using OnlineShoppingStore.Domain.Entities;
+
 
 namespace OnlineShoppingStore.Domain.Concrete
 {
     public class EmailSettings
     {
         public string MailToAddress = "orders@example.com";
-        public string MailFromAddress = "onlineshopping@example.com";
+        public string MailFromAddress = "sportsstore@example.com";
         public bool UseSsl = true;
         public string Username = "MySmtpUsername";
         public string Password = "MySmtpPassword";
@@ -92,11 +92,6 @@ namespace OnlineShoppingStore.Domain.Concrete
 
                 smtpClient.Send(mailMessage);
             }
-        }
-
-        void IOrderProcessor.ProcessOrder(Cart cart, ShippingDetails shippingDetails)
-        {
-            throw new NotImplementedException();
         }
     }
 
