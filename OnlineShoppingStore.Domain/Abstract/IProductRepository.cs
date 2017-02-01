@@ -1,9 +1,5 @@
 ﻿using OnlineShoppingStore.Domain.Entities;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OnlineShoppingStore.Domain.Abstract
 {
@@ -11,6 +7,7 @@ namespace OnlineShoppingStore.Domain.Abstract
     {
         IEnumerable<Product> Products { get; }
         void SaveProduct(Product product);
+        Product DeleteProduct(int productID);
     }
 
 }
