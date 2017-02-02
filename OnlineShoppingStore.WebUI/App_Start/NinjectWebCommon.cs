@@ -16,6 +16,8 @@ namespace OnlineShoppingStore.WebUI.App_Start
     using System.Collections.Generic;
     using Domain.Concrete;
     using System.Configuration;
+    using Infrastructure.Abstract;
+    using Infrastructure.Concrete;
 
     public static class NinjectWebCommon 
     {
@@ -77,6 +79,10 @@ namespace OnlineShoppingStore.WebUI.App_Start
 
             kernel.Bind<IOrderProcessor>().To<EmailOrderProcessor>()
                 .WithConstructorArgument("settings", emailSettings);
+
+            kernel.Bind<IOrderProcessor>().To<EmailOrderProcessor>()
+                .WithConstructorArgument("settings", emailSettings);
+            kernel.Bind<IAuthProvider>().To<FormsAuthProvider>();
 
             //Mock<IProductRepository> mock = new Mock<IProductRepository>();
             //mock.Setup(m => m.Products).Returns(new List<Product>
