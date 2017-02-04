@@ -80,6 +80,7 @@ namespace OnlineShoppingStore.WebUI.App_Start
             kernel.Bind<IOrderProcessor>().To<EmailOrderProcessor>()
                 .WithConstructorArgument("settings", emailSettings);
             kernel.Bind<IAuthProvider>().To<FormsAuthProvider>();
+
             //Mock<IProductRepository> mock = new Mock<IProductRepository>();
             //mock.Setup(m => m.Products).Returns(new List<Product>
             //{

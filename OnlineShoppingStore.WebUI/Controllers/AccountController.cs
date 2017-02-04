@@ -1,28 +1,30 @@
 ﻿using OnlineShoppingStore.WebUI.Infrastructure.Abstract;
 using OnlineShoppingStore.WebUI.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace OnlineShoppingStore.WebUI.Controllers
 {
+    [Authorize]
     public class AccountController : Controller
     {
         IAuthProvider authProvider;
-
+        
+        
         public AccountController(IAuthProvider auth)
         {
             authProvider = auth;
         }
 
-        public ViewResult Login()
+        [AllowAnonymous]
+        public ActionResult Login()
         {
             return View();
         }
 
+
         [HttpPost]
+        [AllowAnonymous]
         public ActionResult Login(LoginViewModel model, string returnUrl)
         {
 
@@ -30,6 +32,7 @@ namespace OnlineShoppingStore.WebUI.Controllers
             {
                 if (authProvider.Authenticate(model.UserName, model.Password))
                 {
+                    FormsAuthentication.SetAuthCookie(model.UserName, false);
                     return Redirect(returnUrl ?? Url.Action("Index", "Admin"));
                 }
                 else
@@ -42,6 +45,11 @@ namespace OnlineShoppingStore.WebUI.Controllers
             {
                 return View();
             }
+        }
+        public ActionResult Logout()
+        {
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Index", "Admin");
         }
     }
 }

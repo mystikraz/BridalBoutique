@@ -22,6 +22,20 @@
         {
             <div class="alert alert-success">@TempData["message"]</div>
         }
+
+        @{
+            var userName = HttpContext.Current.User.Identity.Name;
+            if (userName!="" || userName != null)
+            {
+                <h3>Online Shopping Store</h3>
+                <span class="btn-info btn pull-right">
+                    @Html.ActionLink(userName + " - Logout", "Logout", "Account")
+
+                </span>
+
+            }
+        }
+
         @RenderBody()
     </div>
 </body>

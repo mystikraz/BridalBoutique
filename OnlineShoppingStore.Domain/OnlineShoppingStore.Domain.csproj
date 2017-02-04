@@ -49,14 +49,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstract\IAuthentication.cs" />
     <Compile Include="Abstract\IOrderProcessor.cs" />
     <Compile Include="Abstract\IProductRepository.cs" />
     <Compile Include="Concrete\EFDbContext.cs" />
     <Compile Include="Concrete\EFProductRepository.cs" />
     <Compile Include="Concrete\EmailOrderProcessor.cs" />
+    <Compile Include="Concrete\FormsAuthenticationProvider.cs" />
     <Compile Include="Entities\Cart.cs" />
     <Compile Include="Entities\Product.cs" />
     <Compile Include="Entities\ShippingDetails.cs" />
+    <Compile Include="Entities\User.cs" />
+    <Compile Include="Migrations\201702040631522_initial.cs" />
+    <Compile Include="Migrations\201702040631522_initial.Designer.cs">
+      <DependentUpon>201702040631522_initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -65,6 +73,11 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201702040631522_initial.resx">
+      <DependentUpon>201702040631522_initial.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
