@@ -11,13 +11,8 @@ namespace OnlineShoppingStore.WebUI.App_Start
     using Ninject;
     using Ninject.Web.Common;
     using Domain.Abstract;
-    using Moq;
-    using Domain.Entities;
-    using System.Collections.Generic;
     using Domain.Concrete;
     using System.Configuration;
-    using Infrastructure.Abstract;
-    using Infrastructure.Concrete;
 
     public static class NinjectWebCommon 
     {
@@ -79,7 +74,7 @@ namespace OnlineShoppingStore.WebUI.App_Start
 
             kernel.Bind<IOrderProcessor>().To<EmailOrderProcessor>()
                 .WithConstructorArgument("settings", emailSettings);
-            kernel.Bind<IAuthProvider>().To<FormsAuthProvider>();
+            kernel.Bind<IAuthentication>().To<FormsAuthenticationProvider>();
 
             //Mock<IProductRepository> mock = new Mock<IProductRepository>();
             //mock.Setup(m => m.Products).Returns(new List<Product>

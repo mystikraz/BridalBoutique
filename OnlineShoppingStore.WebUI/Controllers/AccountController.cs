@@ -1,4 +1,4 @@
-﻿using OnlineShoppingStore.WebUI.Infrastructure.Abstract;
+﻿using OnlineShoppingStore.Domain.Abstract;
 using OnlineShoppingStore.WebUI.Models;
 using System.Web.Mvc;
 using System.Web.Security;
@@ -8,12 +8,12 @@ namespace OnlineShoppingStore.WebUI.Controllers
     [Authorize]
     public class AccountController : Controller
     {
-        IAuthProvider authProvider;
+        IAuthentication authentication;
         
         
-        public AccountController(IAuthProvider auth)
+        public AccountController(IAuthentication auth)
         {
-            authProvider = auth;
+            this.authentication = auth;
         }
 
         [AllowAnonymous]
@@ -30,7 +30,7 @@ namespace OnlineShoppingStore.WebUI.Controllers
 
             if (ModelState.IsValid)
             {
-                if (authProvider.Authenticate(model.UserName, model.Password))
+                if (authentication.Authenticate(model.UserName, model.Password))
                 {
                     FormsAuthentication.SetAuthCookie(model.UserName, false);
                     return Redirect(returnUrl ?? Url.Action("Index", "Admin"));

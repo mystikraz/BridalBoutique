@@ -25,11 +25,11 @@
 
         @{
             var userName = HttpContext.Current.User.Identity.Name;
-            if (userName!="" || userName != null)
+            if (userName!="")
             {
                 <h3>Online Shopping Store</h3>
                 <span class="btn-info btn pull-right">
-                    @Html.ActionLink(userName + " - Logout", "Logout", "Account")
+                    @Html.ActionLink(HttpContext.Current.User.Identity.Name + " - Logout", "Logout", "Account")
 
                 </span>
 
