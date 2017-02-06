@@ -19,11 +19,12 @@
                     <span class="icon-bar"></span>
                 </button>
                 @Html.ActionLink("Bridal Boutique", "List", "Product", new { area = "" }, new { @class = "navbar-brand" })
+                           </div>
+            <div class="mWidth100">
                 @Html.Action("Summary", "Cart")
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav"></ul>
-                <div class="visible-xs">
+                </div>
+            <div class="navbar-collapse collapse mWidth100">
+                                <div class="visible-xs">
                     @Html.Action("Menu", "Nav", new { horizontalLayout = true })
                 </div>
 

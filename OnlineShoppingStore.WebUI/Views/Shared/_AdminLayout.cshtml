@@ -17,7 +17,7 @@
     <title></title>
 </head>
 <body>
-    <div>
+    <div class="container">
         @if (TempData["message"] != null)
         {
             <div class="alert alert-success">@TempData["message"]</div>
@@ -28,8 +28,8 @@
             if (userName!="")
             {
                 <h3>Online Shopping Store</h3>
-                <span class="btn-info btn pull-right">
-                    @Html.ActionLink(HttpContext.Current.User.Identity.Name + " - Logout", "Logout", "Account")
+                <span class="pull-right">
+                    @Html.ActionLink(HttpContext.Current.User.Identity.Name + " - Logout", "Logout", "Account", new { @class = "btn btn-info" })
 
                 </span>
 

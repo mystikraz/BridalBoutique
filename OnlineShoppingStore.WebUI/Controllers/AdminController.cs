@@ -27,6 +27,7 @@ namespace OnlineShoppingStore.WebUI.Controllers
             return View(product);
         }
         [HttpPost]
+        [AllowAnonymous]
         public ActionResult Edit(Product product, HttpPostedFileBase image = null)
         {
             if (ModelState.IsValid)

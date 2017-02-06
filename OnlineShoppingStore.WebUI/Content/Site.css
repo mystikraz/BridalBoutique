@@ -17,4 +17,13 @@ textarea {
     max-width: 280px;
 }
 
+@media only screen and (min-device-width : 320px) and (max-device-width : 768px) {
+
+    .mWidth100 {width: 100%;}
+    .lead{font-size:12px !important;}
+    .body-content {
+        padding-top: 120px;
+    }
+}
+
 
