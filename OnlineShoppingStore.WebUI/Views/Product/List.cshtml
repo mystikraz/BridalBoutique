@@ -1,11 +1,35 @@
 ﻿@model OnlineShoppingStore.WebUI.Models.ProductsListViewModel
 
-
+<link href="~/scripts/" rel="stylesheet" />
+<script src="~/scripts/jquery.js"></script>
+<script src="~/scripts/jquery-ui.js"></script>
 
 
 @{
     ViewBag.Title = "Products";
 }
+
+<script type="text/javascript" language="javascript">
+    $(function () {
+        $("#txtSearch").autocomplete({
+            source: '@Url.Action("GetProducts")',
+            minLength: 2,
+            autoFocus: true,
+            position: { my: "left top", at: "left bottom" }
+        });
+    });
+</script>
+
+@using (Html.BeginForm())
+{
+
+    @Html.TextBox("searchTerm", null, new { id = "txtSearch", style = " height: 38px; margin-left: -12px; margin-bottom: -5px;", @class = "", @placeholder = " eg. apple iphone" })
+    <input type="submit" value="Search" style="" class="btn btn-success" id="searhBtn" />   <br />    <br />
+
+}
+
+
+
 
 @foreach (var p in Model.Products)
 {

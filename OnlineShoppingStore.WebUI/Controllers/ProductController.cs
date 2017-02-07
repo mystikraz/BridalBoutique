@@ -1,4 +1,5 @@
 ﻿using OnlineShoppingStore.Domain.Abstract;
+using OnlineShoppingStore.Domain.Concrete;
 using OnlineShoppingStore.Domain.Entities;
 using OnlineShoppingStore.WebUI.Models;
 using System;
@@ -50,6 +51,31 @@ namespace OnlineShoppingStore.WebUI.Controllers
             {
                 return null;
             }
+        }
+
+        [HttpPost]
+        public ActionResult List(string searchTerm)
+        {
+            EFDbContext db = new EFDbContext();
+            ProductsListViewModel model = new ProductsListViewModel();
+
+            if (String.IsNullOrEmpty(searchTerm))
+            {
+                model.Products = db.Products;
+            }
+            else
+            {
+                model.Products = db.Products.Where(x => x.Name.StartsWith(searchTerm));
+            }
+
+
+            model.PagingInfo = new PagingInfo();
+            model.PagingInfo.CurrentPage = 1; model.PagingInfo.ItemsPerPage = 1; model.PagingInfo.TotalItems = 1;
+
+            model.CurrentCategory = db.Products.Where(p => p.Category == model.CurrentCategory).ToString();
+
+
+            return View(model);
         }
 
     }
