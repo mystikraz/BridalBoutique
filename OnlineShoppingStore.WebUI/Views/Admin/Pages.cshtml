@@ -1,0 +1,24 @@
+﻿@model IEnumerable<OnlineShoppingStore.Domain.Entities.Page>
+
+
+
+
+@{
+    ViewBag.Title = "Edit your Pages";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Edit your Pages</h2>
+
+<div>
+       <hr />
+   @foreach(var item in Model){
+       <h3>@item.Header</h3>
+    <p>@item.Content</p>
+    }
+    
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

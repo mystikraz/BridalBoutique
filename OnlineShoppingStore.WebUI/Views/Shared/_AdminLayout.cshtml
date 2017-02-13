@@ -35,8 +35,32 @@
 
             }
         }
+        <div class="panel panel-default">
 
-        @RenderBody()
+            <div class="panel-heading">
+                <h3>Dashboard</h3>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <h4>Edit Pages</h4>
+                        <a href="pages" class="btn btn-block">Edit pages</a>
+                        <h3>Product</h3>
+                        <a href="product" class="btn btn-block">Edit Products</a>
+
+                        <h4>Transactions</h4>
+
+                    </div>
+                    <div class="col-sm-9">@RenderBody()</div>
+                </div>
+                
+            </div>
+            <div class="panel-footer">
+               &copy; Bridal Boutique
+            </div>
+        </div>
+
+      
     </div>
 </body>
 </html>

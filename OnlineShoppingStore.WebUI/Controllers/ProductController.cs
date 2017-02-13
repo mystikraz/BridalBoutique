@@ -18,6 +18,10 @@ namespace OnlineShoppingStore.WebUI.Controllers
         {
             repository = repo;
         }
+        public ViewResult Index()
+        {
+            return View(repository.Products);
+        }
         public ViewResult List(string category, int page=1)
         {
             ProductsListViewModel model = new ProductsListViewModel

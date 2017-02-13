@@ -10,15 +10,25 @@ namespace OnlineShoppingStore.WebUI.Controllers
     public class AdminController : Controller
     {
         private IProductRepository repository;
+        private IPagesRepository pgrepo;
 
-        public AdminController(IProductRepository repo)
+        public AdminController(IProductRepository repo, IPagesRepository pg)
         {
             repository = repo;
+            pgrepo = pg;
         }
 
         public ViewResult Index()
         {
             return View(repository.Products);
+        }
+        public ViewResult Product()
+        {
+            return View(repository.Products);
+        }
+        public ViewResult Pages()
+        {
+            return View(pgrepo.Pages);
         }
         public ViewResult Edit(int productId)
         {
@@ -26,6 +36,8 @@ namespace OnlineShoppingStore.WebUI.Controllers
                 .FirstOrDefault(p => p.ProductID == productId);
             return View(product);
         }
+
+        [ValidateAntiForgeryToken]
         [HttpPost]
         [AllowAnonymous]
         public ActionResult Edit(Product product, HttpPostedFileBase image = null)
@@ -51,7 +63,32 @@ namespace OnlineShoppingStore.WebUI.Controllers
 
         public ViewResult Create()
         {
-            return View("Edit", new Product());
+            //return View("Edit", new Product());
+            return View(new Product());
+        }
+
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        [AllowAnonymous]
+        public ActionResult Create(Product product, HttpPostedFileBase image = null)
+        {
+            if (ModelState.IsValid)
+            {
+                if (image != null)
+                {
+                    product.ImageMimeType = image.ContentType;
+                    product.ImageData = new byte[image.ContentLength];
+                    image.InputStream.Read(product.ImageData, 0, image.ContentLength);
+                }
+                repository.SaveProduct(product);
+                TempData["message"] = string.Format("{0} has been saved", product.Name);
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                // there is something wrong with the data values
+                return View(product);
+            }
         }
 
         [HttpPost]

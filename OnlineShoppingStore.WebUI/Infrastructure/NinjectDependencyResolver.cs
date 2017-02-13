@@ -1,6 +1,8 @@
-﻿using Ninject;
+﻿using Moq;
+using Ninject;
 using OnlineShoppingStore.Domain.Abstract;
 using OnlineShoppingStore.Domain.Concrete;
+using OnlineShoppingStore.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -41,6 +43,16 @@ namespace OnlineShoppingStore.WebUI.Infrastructure
             kernel.Bind<IOrderProcessor>().To<EmailOrderProcessor>()
                 .WithConstructorArgument("settings", emailSettings);
             kernel.Bind<IAuthentication>().To<FormsAuthenticationProvider>();
+
+
+            Mock<IPagesRepository> mock = new Mock<IPagesRepository>();
+            mock.Setup(m => m.Pages).Returns(new List<Page> {
+                new Page { Header = "About", Content = "lorem ipsum" },
+                new Page { Header = "Contact", Content = "Contact me" }
+                          });
+
+            kernel.Bind<IPagesRepository>().ToConstant(mock.Object);
         }
+    
     }
 }
