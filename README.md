@@ -1,0 +1,1 @@
+Bridal Boutique is an ecom app which sales only bridal wears built in ASP.NET MVC5
